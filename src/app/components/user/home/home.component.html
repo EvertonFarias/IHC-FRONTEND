@@ -1,5 +1,122 @@
+<section class="hero">
+  <div class="hero-content">
+    <div class="text-content">
+      <h1>Descubra<br>Cartas E Monte<br>Seu Deck</h1>
+      <p>
+        Marketplace de cartas Yu-Gi-Oh!. Colecione,<br>
+        compre e venda cartas raras de milhares de<br>
+        duelistas ao redor do mundo.
+      </p>
+      <button class="cta-button" (click)="montarDeck()">Monte seu deck agora</button>
 
-<div>
-    Testando a home
-</div>
+      <div class="stats">
+        <div>
+          <strong>240k+</strong>
+          <p>Total Vendas</p>
+        </div>
+        <div>
+          <strong>5000+</strong>
+          <p>Cartas</p>
+        </div>
+        <div>
+          <strong>100+</strong>
+          <p>Acessórios</p>
+        </div>
+      </div>
+    </div>
 
+    <div class="image-content">
+      <img src="assets/img/imginicial.png" alt="Imagem Yu-Gi-Oh" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<section class="highlights">
+  <h2>Em Alta</h2>
+  <p>Confira os Destaques Da Semana!</p>
+
+  <div class="cards">
+    <!-- Card 1: Cartas -->
+    <div class="highlight-card" (click)="navegarPara('cartas')">
+      <img src="assets/img/carta01.png" alt="Ghost Ogre" class="main-img" loading="lazy">
+      <div class="thumb-row">
+        <img src="assets/img/carta0101.png" alt="Card 1" loading="lazy">
+        <img src="assets/img/carta0102.png" alt="Card 2" loading="lazy">
+        <span class="count-badge">1025+</span>
+      </div>
+      <h3>Cartas</h3>
+      <p class="tag"><span>🔥</span> Mais vendidos</p>
+    </div>
+
+    <!-- Card 2: Selados -->
+    <div class="highlight-card" (click)="navegarPara('selados')">
+      <img src="assets/img/carta02.png" alt="Selado" class="main-img" loading="lazy">
+      <div class="thumb-row">
+        <img src="assets/img/carta0201.png" alt="Selado 1" loading="lazy">
+        <img src="assets/img/carta0202.png" alt="Selado 2" loading="lazy">
+        <span class="count-badge">1025+</span>
+      </div>
+      <h3>Selados</h3>
+      <p class="tag"><span>🔥</span> Mais vendidos</p>
+    </div>
+
+    <!-- Card 3: Acessórios -->
+    <div class="highlight-card" (click)="navegarPara('acessorios')">
+      <img src="assets/img/carta03.png" alt="Acessório" class="main-img" loading="lazy">
+      <div class="thumb-row">
+        <img src="assets/img/carta0301.png" alt="Acessório 1" loading="lazy">
+        <img src="assets/img/cartao0302.png" alt="Acessório 2" loading="lazy">
+        <span class="count-badge">1025+</span>
+      </div>
+      <h3>Acessórios</h3>
+      <p class="tag"><span>🔥</span> Mais vendidos</p>
+    </div>
+  </div>
+</section>
+
+<section class="categories">
+  <h2>Categorias</h2>
+  <div class="category-grid">
+    <div class="category-card" *ngFor="let categoria of categorias" (click)="navegarPara(categoria.rota)">
+      <img [src]="categoria.imagem" [alt]="categoria.nome" loading="lazy">
+      <p>{{ categoria.nome }}</p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-column">
+    <h3>Redes</h3>
+    <p>Nos acompanhe nas redes</p>
+    <div class="social-icons">
+      <i class="icon" (click)="abrirRede('discord')">🎮</i>
+      <i class="icon" (click)="abrirRede('youtube')">📺</i>
+      <i class="icon" (click)="abrirRede('twitter')">🐦</i>
+      <i class="icon" (click)="abrirRede('instagram')">📸</i>
+    </div>
+  </div>
+
+  <div class="footer-column">
+    <h3>Explore</h3>
+    <ul>
+      <li><a href="#" (click)="navegarPara('cartas')">Cartas</a></li>
+      <li><a href="#" (click)="navegarPara('rankings')">Rankings</a></li>
+      <li><a href="#" (click)="navegarPara('duelos')">Duelos</a></li>
+    </ul>
+  </div>
+
+  <div class="footer-column">
+    <h3>Participe Do Nosso Resumo Semanal</h3>
+    <p>Tenha atualizações e promoções exclusivas na sua caixa de entrada</p>
+    <form class="newsletter" (ngSubmit)="inscreverNewsletter($event)">
+      <input 
+        type="email" 
+        placeholder="Insira seu e-mail aqui" 
+        #emailInput
+        name="email"
+        required />
+      <button type="submit">Inscrever-se</button>
+    </form>
+  </div>
+</footer>
+<hr class="footer-divider">

@@ -1,6 +1,65 @@
+<!-- header.component.html -->
 <header>
-  <h2><a [routerLink] ="authenticated ? 'user/home' :  '/'">CalangoSocial</a></h2>
-    <app-auth-buttons *ngIf="!authenticated">  </app-auth-buttons>
-    <app-user-info *ngIf="authenticated" [logout]="logout.bind(this)"></app-user-info>
-</header>
+  <div class="navbar">
+    <div class="navbar-left">
+      <img src="assets/img/logoihc.png" alt="Logo" class="logo">
+    </div>
 
+    <!-- Hamburger Menu for Mobile -->
+    <button class="mobile-menu-btn" (click)="toggleMobileMenu()" [class.active]="showMobileMenu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <!-- Navigation Links -->
+    <nav class="navbar-center" [class.mobile-active]="showMobileMenu">
+      <a href="#" class="nav-link" (click)="showMobileMenu = false">Home</a>
+      <a href="#" class="nav-link" (click)="showMobileMenu = false">Cartas</a>
+    </nav>
+
+    <div class="navbar-right">
+      <!-- Search Box -->
+      <div class="search-box">
+        <input type="text" placeholder="Pesquisar...">
+        <button class="search-button">🔍</button>
+      </div>
+
+      <!-- Profile Container -->
+      <div class="profile-container" *ngIf="authenticated">
+        <img 
+          [src]="(user$ | async)?.profilePicture || 'assets/img/avatar.png'" 
+          alt="Avatar" 
+          class="avatar"
+          (click)="toggleProfileDropdown()"
+          [class.active]="showProfileDropdown">
+        
+        <!-- Profile Dropdown -->
+        <div class="profile-dropdown" [class.show]="showProfileDropdown">
+          <div class="dropdown-header">
+            <img 
+              [src]="(user$ | async)?.profilePicture || 'assets/img/avatar.png'" 
+              alt="Avatar" 
+              class="dropdown-avatar">
+            <div class="user-info" *ngIf="user$ | async as user">
+              <span class="username">{{ user.login || 'Usuário' }}</span>
+              <span class="user-email">{{ user.email }}</span>
+            </div>
+          </div>
+          <hr class="dropdown-divider">
+          <button class="dropdown-item" (click)="viewProfile()">
+            <span class="icon">👤</span>
+            Ver Perfil
+          </button>
+          <button class="dropdown-item logout" (click)="logout()">
+            <span class="icon">🚪</span>
+            Logout
+          </button>
+        </div>
+      </div>
+
+      <!-- Auth Buttons (when not authenticated) -->
+      <app-auth-buttons *ngIf="!authenticated"></app-auth-buttons>
+    </div>
+  </div>
+</header>
