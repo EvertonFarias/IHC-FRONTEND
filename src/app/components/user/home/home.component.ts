@@ -84,10 +84,10 @@ export class HomeComponent implements OnInit{
   abrirRede(rede: string): void {
     // URLs das redes sociais
     const redesSociais: { [key: string]: string } = {
-      discord: 'https://discord.gg/yugioh',
-      youtube: 'https://youtube.com/yugioh',
-      twitter: 'https://twitter.com/yugioh',
-      instagram: 'https://instagram.com/yugioh'
+      discord: 'https://discord.gg/dualShop',
+      youtube: 'https://youtube.com/dualShop',
+      twitter: 'https://twitter.com/dualShop',
+      instagram: 'https://instagram.com/dualShop'
     };
 
     if (redesSociais[rede]) {
