@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, Validators, ReactiveFormsModule, AbstractControl, ValidationErrors } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
@@ -25,7 +25,7 @@ export class ResetPasswordComponent {
     private router: Router
   ) {
     this.form = this.fb.group({
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required, Validators.minLength(8), this.passwordStrengthValidator.bind(this)]],
       confirmPassword: ['', Validators.required]
     });
 
@@ -34,6 +34,56 @@ export class ResetPasswordComponent {
     if (!this.token) {
       this.error = 'Token não encontrado na URL.';
     }
+  }
+
+  // Validador para força da senha
+  private passwordStrengthValidator(control: AbstractControl): ValidationErrors | null {
+    if (!control.value) return null;
+
+    const password = control.value;
+    const errors: any = {};
+
+    if (!/(?=.*[a-z])/.test(password)) {
+      errors.lowercase = 'Deve conter pelo menos uma letra minúscula';
+    }
+    if (!/(?=.*[A-Z])/.test(password)) {
+      errors.uppercase = 'Deve conter pelo menos uma letra maiúscula';
+    }
+    if (!/(?=.*\d)/.test(password)) {
+      errors.number = 'Deve conter pelo menos um número';
+    }
+    if (!/(?=.*[@$!%*?&])/.test(password)) {
+      errors.special = 'Deve conter pelo menos um caractere especial (@$!%*?&)';
+    }
+
+    return Object.keys(errors).length ? { passwordStrength: errors } : null;
+  }
+
+  // Método para obter erros de senha em tempo real
+  getPasswordErrors(): string[] {
+    const passwordField = this.form.get('password');
+    if (!passwordField?.value) return [];
+
+    const password = passwordField.value;
+    const errors: string[] = [];
+
+    if (!/(?=.*[a-z])/.test(password)) {
+      errors.push('Deve conter pelo menos uma letra minúscula');
+    }
+    if (!/(?=.*[A-Z])/.test(password)) {
+      errors.push('Deve conter pelo menos uma letra maiúscula');
+    }
+    if (!/(?=.*\d)/.test(password)) {
+      errors.push('Deve conter pelo menos um número');
+    }
+    if (!/(?=.*[@$!%*?&])/.test(password)) {
+      errors.push('Deve conter pelo menos um caractere especial (@$!%*?&)');
+    }
+    if (password.length < 8) {
+      errors.push('Pelo menos 8 caracteres');
+    }
+
+    return errors;
   }
 
   submit() {
