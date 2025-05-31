@@ -246,7 +246,7 @@ label {
   to { transform: rotate(360deg); }
 }
 
-.text-link {
+a {
   color: #a259ff;
   text-decoration: none;
   font-weight: 500;
@@ -254,6 +254,12 @@ label {
   align-items: center;
   gap: 0.25rem;
   transition: all 0.3s ease;
+}
+.text-link {
+  color: #a259ff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
 }
 
 .text-link:hover {
@@ -263,6 +269,7 @@ label {
 
 .link-icon {
   font-size: 18px;
+  color: #a259ff;
 }
 
 p {
