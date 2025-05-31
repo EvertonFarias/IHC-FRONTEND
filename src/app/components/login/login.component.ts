@@ -3,20 +3,19 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../services/auth.service';
-import { MatIconModule } from '@angular/material/icon';
 import Swal from 'sweetalert2';
 
 import { UserService } from '../../services/UserService';
 import { environment } from '../../../environment';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: [
-    './login.component.css',
-  './css/banner.css'],
+    './login.component.css'],
   standalone: true,
-  imports: [ReactiveFormsModule, RouterModule],
+  imports: [ReactiveFormsModule, RouterModule, MatIconModule],
 })
 export class LoginComponent {
   loginForm: FormGroup;

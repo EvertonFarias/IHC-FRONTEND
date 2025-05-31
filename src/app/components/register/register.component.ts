@@ -5,13 +5,15 @@ import { Router, RouterModule } from '@angular/router';
 import Swal from 'sweetalert2';
 import { environment } from '../../../environment';
 import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterModule, CommonModule],
+  imports: [ReactiveFormsModule, RouterModule, CommonModule, MatIconModule, MatFormFieldModule ],
   templateUrl: './register.component.html',
-  styleUrls: ['./css/register.component.css', './css/media-queries.css']
+  styleUrls: ['./css/register.component.css']
 })
 export class RegisterComponent {
   registerForm: FormGroup;

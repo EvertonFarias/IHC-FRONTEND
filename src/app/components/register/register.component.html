@@ -7,13 +7,16 @@
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <!-- Nome de usuário -->
       <div class="input-group">
-        <input 
-          formControlName="login" 
-          type="text" 
-          placeholder="Nome de usuário"
-          [class.error]="isFieldInvalid('login')"
-          (input)="formatUsername($event)"
-          required>
+        <div class="input-wrapper">
+          <span class="material-icons input-icon">person</span>
+          <input 
+            formControlName="login" 
+            type="text" 
+            placeholder="Nome de usuário"
+            [class.error]="isFieldInvalid('login')"
+            (input)="formatUsername($event)"
+            required>
+        </div>
         <div class="error-message" *ngIf="getFieldError('login')">
           {{ getFieldError('login') }}
         </div>
@@ -24,36 +27,49 @@
 
       <!-- Data de nascimento -->
       <div class="input-group">
-        <label for="dateOfBirth">Data de nascimento</label>
-        <input 
-          formControlName="dateOfBirth" 
-          type="date" 
-          id="dateOfBirth"
-          [max]="maxDate"
-          [min]="minDate"
-          [class.error]="isFieldInvalid('dateOfBirth')"
-          required>
+        <label for="dateOfBirth">
+          <span class="material-icons label-icon">cake</span>
+          Data de nascimento
+        </label>
+        <div class="input-wrapper">
+          <span class="material-icons input-icon">event</span>
+          <input 
+            formControlName="dateOfBirth" 
+            type="date" 
+            id="dateOfBirth"
+            [max]="maxDate"
+            [min]="minDate"
+            [class.error]="isFieldInvalid('dateOfBirth')"
+            required>
+        </div>
         <div class="error-message" *ngIf="getFieldError('dateOfBirth')">
           {{ getFieldError('dateOfBirth') }}
         </div>
         <div class="info-text" *ngIf="calculateAge() !== null && !getFieldError('dateOfBirth')">
+          <span class="material-icons info-icon">info</span>
           Idade: {{ calculateAge() }} anos
         </div>
       </div>
 
       <!-- Gênero -->
       <div class="input-group">
-        <label for="gender">Gênero</label>
-        <select 
-          formControlName="gender" 
-          id="gender"
-          [class.error]="isFieldInvalid('gender')"
-          required>
-          <option value="" disabled>Selecione</option>
-          <option value="male">Masculino</option>
-          <option value="female">Feminino</option>
-          <option value="other">Outro</option>
-        </select>
+        <label for="gender">
+          <span class="material-icons label-icon">wc</span>
+          Gênero
+        </label>
+        <div class="input-wrapper">
+          <span class="material-icons input-icon">person_outline</span>
+          <select 
+            formControlName="gender" 
+            id="gender"
+            [class.error]="isFieldInvalid('gender')"
+            required>
+            <option value="" disabled>Selecione</option>
+            <option value="male">Masculino</option>
+            <option value="female">Feminino</option>
+            <option value="other">Outro</option>
+          </select>
+        </div>
         <div class="error-message" *ngIf="getFieldError('gender')">
           {{ getFieldError('gender') }}
         </div>
@@ -61,12 +77,15 @@
 
       <!-- Email -->
       <div class="input-group">
-        <input 
-          formControlName="email" 
-          type="email" 
-          placeholder="example@example.com"
-          [class.error]="isFieldInvalid('email')"
-          required>
+        <div class="input-wrapper">
+          <span class="material-icons input-icon">email</span>
+          <input 
+            formControlName="email" 
+            type="email" 
+            placeholder="example@example.com"
+            [class.error]="isFieldInvalid('email')"
+            required>
+        </div>
         <div class="error-message" *ngIf="getFieldError('email')">
           {{ getFieldError('email') }}
         </div>
@@ -74,34 +93,49 @@
 
       <!-- Senha -->
       <div class="input-group">
-        <input 
-          formControlName="password" 
-          type="password" 
-          placeholder="Senha (mín. 8 caracteres)"
-          [class.error]="isFieldInvalid('password')"
-          required>
+        <div class="input-wrapper">
+          <span class="material-icons input-icon">lock</span>
+          <input 
+            formControlName="password" 
+            type="password" 
+            placeholder="Senha (mín. 8 caracteres)"
+            [class.error]="isFieldInvalid('password')"
+            required>
+        </div>
         <div class="error-message" *ngIf="getFieldError('password') && !getPasswordErrors().length">
           {{ getFieldError('password') }}
         </div>
         <div class="password-requirements" *ngIf="registerForm.get('password')?.value && getPasswordErrors().length > 0">
-          <small>A senha deve conter:</small>
+          <small>
+            <span class="material-icons info-icon">security</span>
+            A senha deve conter:
+          </small>
           <ul>
-            <li *ngFor="let error of getPasswordErrors()" class="password-error">{{ error }}</li>
+            <li *ngFor="let error of getPasswordErrors()" class="password-error">
+              <span class="material-icons error-icon">warning</span>
+              {{ error }}
+            </li>
           </ul>
         </div>
         <div class="password-strength-ok" *ngIf="registerForm.get('password')?.value && getPasswordErrors().length === 0 && registerForm.get('password')?.value.length >= 8">
-          <small>✓ Senha forte!</small>
+          <small>
+            <span class="material-icons success-icon">check_circle</span>
+            Senha forte!
+          </small>
         </div>
       </div>
 
       <!-- Confirmar senha -->
       <div class="input-group">
-        <input 
-          formControlName="confirmPassword" 
-          type="password" 
-          placeholder="Confirme sua Senha"
-          [class.error]="getConfirmPasswordError() !== null"
-          required>
+        <div class="input-wrapper">
+          <span class="material-icons input-icon">lock_outline</span>
+          <input 
+            formControlName="confirmPassword" 
+            type="password" 
+            placeholder="Confirme sua Senha"
+            [class.error]="getConfirmPasswordError() !== null"
+            required>
+        </div>
         <div class="error-message" *ngIf="getConfirmPasswordError()">
           {{ getConfirmPasswordError() }}
         </div>
@@ -113,16 +147,22 @@
         class="btn btn-primary" 
         [disabled]="registerForm.invalid || registerForm.disabled">
         <span *ngIf="!registerForm.disabled">
-          <i class="icon-user-plus" aria-hidden="true"></i>
+          <span class="material-icons button-icon">person_add</span>
           Criar Conta
         </span>
         <span *ngIf="registerForm.disabled">
-          <i class="icon-spinner" aria-hidden="true"></i>
+          <span class="material-icons button-icon rotating">autorenew</span>
           Criando conta...
         </span>
       </button>
     </form>
     
-    <p>Já tem uma conta? <a class="text-link" routerLink="/auth/login">Iniciar sessão</a></p>
+    <p>
+      Já tem uma conta? 
+      <a class="text-link" routerLink="/auth/login">
+        <span class="material-icons link-icon">login</span>
+        Iniciar sessão
+      </a>
+    </p>
   </div>
 </section>

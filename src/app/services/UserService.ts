@@ -74,9 +74,7 @@ export class UserService implements OnDestroy {
     return userData$;
   }
 
-  /**
-   * Retorna o usuário atual sem precisar se inscrever no Observable
-   */
+  
   getCurrentUser(): UserDTO | null {
     return this.userSubject.getValue();
   }

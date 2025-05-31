@@ -1,6 +1,5 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
-import { InitialHomeContentComponent } from './app/components/initial-home-content/initial-home-content.component';
 import { RegisterComponent } from './app/components/register/register.component';
 import { LoginComponent } from './app/components/login/login.component';
 import { provideRouter } from '@angular/router';
@@ -15,21 +14,14 @@ import { HomeComponent } from './app/components/user/home/home.component';
 import { ForgotPasswordComponent } from './app/components/auth/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './app/components/auth/reset-password/reset-password.component';
 import { EmailVerifiedGuard } from './app/guards/EmailVerifiedGuard';
-import { createComponent } from '@angular/core';
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { getStorage, provideStorage } from '@angular/fire/storage';
-import { environment } from './environment';
 
 
 (window as any).global = window;
 
-
-
-
 const routes = [
 
   { path: '', 
-    component: InitialHomeContentComponent, 
+    component: LoginComponent, 
     canActivate: [AuthRedirectGuard]  },
   
   { 
