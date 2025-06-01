@@ -1,0 +1,181 @@
+<!-- profile.component.html -->
+<div class="profile-container">
+  <div class="profile-header">
+    <div class="profile-banner">
+      <div class="banner-gradient"></div>
+    </div>
+    
+    <div class="profile-info" *ngIf="user$ | async as user">
+      <div class="avatar-section">
+        <div class="avatar-container">
+          <img [src]="user.profilePicture || 'assets/img/avatar.jpg'" 
+               alt="Avatar" class="profile-avatar">
+          <button class="edit-avatar-btn" *ngIf="isEditing" (click)="fileInput.click()">
+            <i class="fas fa-camera"></i>
+          </button>
+          <input #fileInput type="file" accept="image/*" style="display: none" 
+                 (change)="onFileSelected($event)">
+        </div>
+        <div class="online-status" [class.verified]="user.verifiedEmail"></div>
+      </div>
+
+      <div class="user-details">
+        <div class="user-main-info" *ngIf="!isEditing">
+          <p class="user-bio" *ngIf="bio">{{ bio }}</p>
+          <div class="user-meta">
+            <span class="location" *ngIf="location">
+              <i class="fas fa-map-marker-alt"></i> {{ location }}
+            </span>
+            <span class="join-date">
+              <i class="fas fa-calendar-alt"></i> Membro desde {{ formatJoinDate() }}
+            </span>
+            <span class="favorite-card" *ngIf="favoriteCard">
+              <i class="fas fa-heart"></i> {{ favoriteCard }}
+            </span>
+          </div>
+        </div>
+
+        <div class="edit-form" *ngIf="isEditing">
+          <div class="form-group">
+            <label>Nome de usuário</label>
+            <input type="text" [(ngModel)]="editForm.login" class="form-input">
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" [(ngModel)]="editForm.email" class="form-input">
+          </div>
+          <div class="form-group">
+            <label>Bio</label>
+            <textarea [(ngModel)]="editForm.bio" class="form-textarea" 
+                      placeholder="Conte um pouco sobre você..."></textarea>
+          </div>
+          <div class="form-group">
+            <label>Carta Favorita</label>
+            <input type="text" [(ngModel)]="editForm.favoriteCard" 
+                   class="form-input" placeholder="Ex: Dragão Branco de Olhos Azuis">
+          </div>
+          <div class="form-group">
+            <label>Localização</label>
+            <input type="text" [(ngModel)]="editForm.location" 
+                   class="form-input" placeholder="Ex: São Paulo, Brasil">
+          </div>
+        </div>
+
+        <div class="profile-actions">
+          <button class="btn-primary" *ngIf="!isEditing" (click)="startEditing()">
+            <i class="fas fa-edit"></i> Editar Perfil
+          </button>
+          <div class="edit-actions" *ngIf="isEditing">
+            <button class="btn-success" (click)="saveProfile()">
+              <i class="fas fa-save"></i> Salvar
+            </button>
+            <button class="btn-secondary" (click)="cancelEditing()">
+              <i class="fas fa-times"></i> Cancelar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="profile-content">
+    <!-- Estatísticas -->
+    <div class="stats-section">
+      <h2 class="section-title">
+        <i class="fas fa-chart-bar"></i> Estatísticas
+      </h2>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon cards">
+            <i class="fas fa-magic"></i>
+          </div>
+          <div class="stat-info">
+            <h3>{{ userStats.totalCards }}</h3>
+            <p>Cartas</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon decks">
+            <i class="fas fa-layer-group"></i>
+          </div>
+          <div class="stat-info">
+            <h3>{{ userStats.totalDecks }}</h3>
+            <p>Decks</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon battles">
+             <i class="fas fa-fist-raised"></i>
+          </div>
+          <div class="stat-info">
+            <h3>{{ userStats.totalBattles }}</h3>
+            <p>Batalhas</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon wins">
+            <i class="fas fa-trophy"></i>
+          </div>
+          <div class="stat-info">
+            <h3>{{ userStats.wins }}</h3>
+            <p>Vitórias</p>
+          </div>
+        </div>
+        <div class="stat-card highlight">
+          <div class="stat-icon winrate">
+            <i class="fas fa-percentage"></i>
+          </div>
+          <div class="stat-info">
+            <h3>{{ userStats.winRate }}%</h3>
+            <p>Taxa de Vitória</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Conquistas -->
+    <div class="achievements-section">
+      <h2 class="section-title">
+        <i class="fas fa-award"></i> Conquistas
+      </h2>
+      <div class="achievements-grid">
+        <div class="achievement-card" 
+             [class.unlocked]="achievement.unlocked" 
+             *ngFor="let achievement of achievements">
+          <div class="achievement-icon">
+            <i [class]="achievement.icon"></i>
+          </div>
+          <div class="achievement-info">
+            <h4>{{ achievement.name }}</h4>
+            <p>{{ achievement.description }}</p>
+            <span class="unlock-date" *ngIf="achievement.unlocked">
+              Desbloqueado em {{ achievement.unlockedDate | date:'dd/MM/yyyy' }}
+            </span>
+          </div>
+          <div class="achievement-status">
+            <i class="fas fa-check" *ngIf="achievement.unlocked"></i>
+            <i class="fas fa-lock" *ngIf="!achievement.unlocked"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Atividade Recente -->
+    <div class="activity-section">
+      <h2 class="section-title">
+        <i class="fas fa-history"></i> Atividade Recente
+      </h2>
+      <div class="activity-list">
+        <div class="activity-item" *ngFor="let activity of recentActivity">
+          <div class="activity-icon">
+            <i [class]="getActivityIcon(activity.type)"></i>
+          </div>
+          <div class="activity-content">
+            <p class="activity-description">{{ activity.description }}</p>
+            <span class="activity-time">{{ activity.time }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,3 @@
-/* Estilos base mantidos exatamente como estavam */
 .hero {
     background-color: #2b2b2b;
     color: white;
@@ -159,6 +158,21 @@
     font-size: 14px;
     color: #ffb347;
     margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.tag i {
+    font-size: 16px;
+    color: #ffb347;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.highlight-card:hover .tag i {
+    transform: scale(1.1);
+    color: #a855f7;
 }
 
 .categories {
@@ -252,16 +266,21 @@
     color: #a855f7;
 }
 
+.social-icons {
+    display: flex;
+    gap: 12px;
+}
+
 .social-icons .icon {
-    display: inline-block;
     font-size: 24px;
-    margin-right: 10px;
-    opacity: 0.6;
-    transition: opacity 0.2s ease;
+    color: #b3b3b3;
+    cursor: pointer;
+    transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .social-icons .icon:hover {
-    opacity: 1;
+    color: #a855f7;
+    transform: scale(1.1);
 }
 
 .newsletter {
@@ -485,6 +504,10 @@
         border-radius: 0 0 10px 10px;
         padding: 12px 20px;
     }
+    
+    .social-icons .icon {
+        font-size: 22px;
+    }
 }
 
 /* Celulares médios (480px - 600px) */
@@ -551,6 +574,10 @@
         font-size: 13px;
     }
     
+    .tag i {
+        font-size: 14px;
+    }
+    
     .category-grid {
         grid-template-columns: 1fr 1fr;
         gap: 10px;
@@ -582,8 +609,7 @@
     }
     
     .social-icons .icon {
-        font-size: 22px;
-        margin-right: 8px;
+        font-size: 20px;
     }
 }
 
@@ -591,7 +617,7 @@
 @media (max-width: 480px) {
     .hero {
         padding: 20px 10px;
-        margin-top: 20px;
+        margin-top: 50px;
     }
     
     .hero-content {
@@ -706,7 +732,7 @@
     }
     
     .social-icons .icon {
-        font-size: 20px;
+        font-size: 18px;
         margin-right: 6px;
     }
     
@@ -749,5 +775,13 @@
     .count-badge {
         padding: 6px 10px;
         font-size: 11px;
+    }
+    
+    .tag i {
+        font-size: 13px;
+    }
+    
+    .social-icons .icon {
+        font-size: 16px;
     }
 }

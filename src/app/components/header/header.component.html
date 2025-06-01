@@ -1,4 +1,3 @@
-<!-- header.component.html -->
 <header>
   <div class="navbar">
     <div class="navbar-left">
@@ -12,23 +11,28 @@
       <span></span>
     </button>
 
-    <!-- Navigation Links -->
+    <!-- Navigation Links and Search -->
     <nav class="navbar-center" [class.mobile-active]="showMobileMenu">
-      <a href="#" class="nav-link" (click)="showMobileMenu = false">Home</a>
+      <!-- Search Box (visible in mobile menu) -->
+      <div class="search-box mobile-search">
+        <input type="text" placeholder="Pesquisar...">
+        <button class="search-button"><i class="fas fa-search"></i></button>
+      </div>
+      <a routerLink="user/home" class="nav-link" (click)="showMobileMenu = false">Home</a>
       <a href="#" class="nav-link" (click)="showMobileMenu = false">Cartas</a>
     </nav>
 
     <div class="navbar-right">
-      <!-- Search Box -->
-      <div class="search-box">
+      <!-- Search Box (visible in desktop) -->
+      <div class="search-box desktop-search">
         <input type="text" placeholder="Pesquisar...">
-        <button class="search-button">🔍</button>
+        <button class="search-button"><i class="fas fa-search"></i></button>
       </div>
 
       <!-- Profile Container -->
       <div class="profile-container" *ngIf="authenticated">
         <img 
-          [src]="(user$ | async)?.profilePicture || 'assets/img/avatar.png'" 
+          [src]="(user$ | async)?.profilePicture || 'assets/img/avatar.jpg'" 
           alt="Avatar" 
           class="avatar"
           (click)="toggleProfileDropdown()"
@@ -38,7 +42,7 @@
         <div class="profile-dropdown" [class.show]="showProfileDropdown">
           <div class="dropdown-header">
             <img 
-              [src]="(user$ | async)?.profilePicture || 'assets/img/avatar.png'" 
+              [src]="(user$ | async)?.profilePicture || 'assets/img/avatar.jpg'" 
               alt="Avatar" 
               class="dropdown-avatar">
             <div class="user-info" *ngIf="user$ | async as user">
@@ -48,18 +52,15 @@
           </div>
           <hr class="dropdown-divider">
           <button class="dropdown-item" (click)="viewProfile()">
-            <span class="icon">👤</span>
+            <i class="fas fa-user icon"></i>
             Ver Perfil
           </button>
           <button class="dropdown-item logout" (click)="logout()">
-            <span class="icon">🚪</span>
+            <i class="fas fa-sign-out-alt icon"></i>
             Logout
           </button>
         </div>
       </div>
-
-      <!-- Auth Buttons (when not authenticated) -->
-      <app-auth-buttons *ngIf="!authenticated"></app-auth-buttons>
     </div>
   </div>
 </header>

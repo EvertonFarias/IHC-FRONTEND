@@ -4,15 +4,13 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { Router, RouterModule } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { UserInfoComponent } from "./user-info/user-info.component";
-import { AuthButtonsComponent } from "./auth-buttons/auth-buttons.component";
 import { UserDTO, UserService } from '../../services/UserService';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
-  imports: [CommonModule, RouterModule, UserInfoComponent, AuthButtonsComponent],
+  imports: [CommonModule, RouterModule],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   authenticated: boolean = false;
@@ -53,7 +51,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   viewProfile(): void {
     this.showProfileDropdown = false;
-    this.router.navigate(['/profile']);
+    this.router.navigate(['/user/profile']);
   }
 
   logout(): void {

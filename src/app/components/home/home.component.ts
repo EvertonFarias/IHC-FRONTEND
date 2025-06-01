@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { RouterModule } from '@angular/router';
-import { UserDTO, UserService } from '../../../services/UserService';
+import { UserDTO, UserService } from '../../services/UserService';
 import { Router } from '@angular/router';
 
 interface Categoria {

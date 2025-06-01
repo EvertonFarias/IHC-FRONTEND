@@ -10,10 +10,11 @@ import { CommonModule } from '@angular/common';
 import { AuthRedirectGuard } from './app/guards/AuthRedirectGuard ';
 import { AuthGuard } from './app/guards/Auth.guard';
 import { RoleGuard } from './app/guards/Role.guard';
-import { HomeComponent } from './app/components/user/home/home.component';
+import { HomeComponent } from './app/components/home/home.component';
 import { ForgotPasswordComponent } from './app/components/auth/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './app/components/auth/reset-password/reset-password.component';
 import { EmailVerifiedGuard } from './app/guards/EmailVerifiedGuard';
+import { ProfileComponent } from './app/components/user/profile/profile.component';
 
 
 (window as any).global = window;
@@ -56,6 +57,11 @@ const routes = [
   {
     path: 'user/home',
     component: HomeComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'user/profile',
+    component: ProfileComponent,
     canActivate: [AuthGuard]
   },
   { path: 'unauthorized', component: UnauthorizedComponent },
