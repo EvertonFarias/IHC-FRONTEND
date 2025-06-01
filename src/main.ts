@@ -15,6 +15,7 @@ import { ForgotPasswordComponent } from './app/components/auth/forgot-password/f
 import { ResetPasswordComponent } from './app/components/auth/reset-password/reset-password.component';
 import { EmailVerifiedGuard } from './app/guards/EmailVerifiedGuard';
 import { ProfileComponent } from './app/components/user/profile/profile.component';
+import { CardsComponent } from './app/components/cards/cards.component';
 
 
 (window as any).global = window;
@@ -62,6 +63,11 @@ const routes = [
   {
     path: 'user/profile',
     component: ProfileComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'cards',
+    component: CardsComponent,
     canActivate: [AuthGuard]
   },
   { path: 'unauthorized', component: UnauthorizedComponent },

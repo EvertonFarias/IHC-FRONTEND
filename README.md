@@ -1,59 +1,99 @@
-# InovaTestFront
+# IHC-FRONTEND
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.9.
+Este é um projeto de frontend desenvolvido em Angular para a disciplina de Interação Humano-Computador (IHC) na faculdade. O sistema simula uma plataforma de cartas colecionáveis, com funcionalidades de autenticação, visualização de cartas e estatísticas do usuário.
 
-## Development server
+## Tecnologias Utilizadas
 
-To start a local development server, run:
+- **Frontend:** Angular, TypeScript, CSS
+- **Backend:** Spring Boot (Java), autenticação JWT
+- **Outros:** RxJS, Angular Forms, consumo de API externa (YGOPRODeck)
 
-```bash
-ng serve
-```
+## Prints do Figma
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Protótipo desenvolvido no Figma:
 
-## Code scaffolding
+![Figma Home](public/readme-img/figma/figma-home.png)
+![Figma Home Responsivo](public/readme-img/figma/figma-home-responsivo.png)
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Prints do Site Pronto
 
-```bash
-ng generate component component-name
-```
+### Header e Home
+![Header](public/readme-img/site/home-header.png)
+![Categorias](public/readme-img/site/home-categorias.png)
+![Em Alta](public/readme-img/site/home-emalta.png)
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### Página de Cartas
+![Cartas](public/readme-img/site/cards.png)
+![Cartas Responsivo](public/readme-img/site/cards-responsivo.png)
 
-```bash
-ng generate --help
-```
+### Perfil do Usuário
+![Perfil do Usuário](public/readme-img/site/user-profile.png)
+![Perfil Responsivo](public/readme-img/site/user-profile-responsivo.png)
 
-## Building
+### Home Responsivo
+![Home Responsivo](public/readme-img/site/site-home-responsivo.png)
 
-To build the project run:
+## Como clonar o projeto
 
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+1. Abra o terminal ou prompt de comando.
+2. Execute o comando abaixo para clonar o repositório do frontend:
 
 ```bash
-ng test
+git clone https://github.com/EvertonFarias/IHC-FRONTEND.git
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
+3. Acesse a pasta do projeto:
 ```bash
-ng e2e
+cd IHC-FRONTEND
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+4. Instale as dependências:
+```bash
+npm install
+```
 
-## Additional Resources
+5. Inicie o projeto:
+```bash
+npx ng serve
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Funcionalidades
+
+- **Login:** Permite que o usuário acesse a plataforma com seu login ou e-mail e senha.
+- **Registro:** Possibilita criar uma nova conta na plataforma. É necessário confirmar o e-mail para ter acesso a todas as funcionalidades do site.
+- **Recuperar senha:** Caso o usuário esqueça a senha, pode solicitar a redefinição. 
+- **Home:** Página inicial com informações gerais e navegação.
+- **Página do usuário:** Exibe dados fictícios do usuário, incluindo estatísticas e informações de perfil.
+- **Página de cartas:** Mostra uma lista de cartas colecionáveis, com as seguintes funcionalidades:
+  - **Busca por nome da carta:** Campo de pesquisa específico na página de cartas para filtrar cartas pelo nome.
+  - **Filtro por tipo de carta:** Permite selecionar o tipo de carta (Ex: Monstro, Magia, Armadilha, etc).
+  - **Ordenação:** Opção para ordenar as cartas por nome ou preço.
+  - **Paginação:** Navegação entre páginas de cartas.
+  - **Visualização de detalhes:** Botão para ver detalhes de cada carta.
+
+> **Importante:** O campo de busca e os filtros funcionam apenas na página de cartas, não no campo de pesquisa do cabeçalho.
+
+## Usuários de exemplo
+
+O backend já possui um usuário criado pelo seeder para facilitar os testes:
+
+- **login:** admin
+- **senha:** admin12345
+
+## Observações
+- Em caso de criação de um novo usuário, verificar se o e-mail chegou no spam.
+- O projeto utiliza dados fictícios para a área do usuário e estatísticas.
+- As imagens e informações das cartas são obtidas da API pública [YGOPRODeck](https://db.ygoprodeck.com/api-guide/).
+- **Limite da API:** A YGOPRODeck permite até 20 requisições por minuto por IP. Caso esse limite seja excedido, novas requisições podem ser temporariamente bloqueadas.
+- O layout é responsivo e adaptado para dispositivos móveis.
+
+## Autores
+
+- WESLLY VITOR GOMES ROCHA SILVA
+- EVERTON DE FARIAS RIBEIRO
+- MARCUS CEZAR MOREIRA FERRAZ
+- PEDRO VINÍCIUS DE LIMA JATOBÁ
+
+---
+
+Projeto acadêmico desenvolvido para fins de estudo e demonstração de conceitos de IHC.

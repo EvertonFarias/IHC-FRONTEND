@@ -1,0 +1,76 @@
+<section class="cards-section">
+  <div class="filters-container">
+    <div class="search-container">
+      <div class="search-wrapper">
+        <i class="fas fa-search search-icon"></i>
+        <input 
+          type="text" 
+          placeholder="Pesquisar por nome da carta..." 
+          [(ngModel)]="searchTerm" 
+          (input)="onSearch()" 
+          class="search-input">
+      </div>
+    </div>
+
+    <div class="filter-controls">
+      <div class="filter-wrapper">
+        <i class="fas fa-filter filter-icon"></i>
+        <select [(ngModel)]="selectedType" (change)="onFilterChange()" class="filter-select">
+          <option value="">Todos os Tipos</option>
+          <option *ngFor="let type of cardTypes" [value]="type">{{ type}}</option>
+        </select>
+      </div>
+      <div class="filter-wrapper">
+        <i class="fas fa-sort-amount-down sort-icon"></i>
+        <select [(ngModel)]="sortBy" (change)="onSortChange()" class="filter-select">
+          <option value="name">Ordenar por Nome</option>
+          <option value="cardmarket_price">Ordenar por Preço</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="loading" *ngIf="loading">
+    <p><i class="fas fa-spinner fa-spin"></i> Carregando cartas...</p>
+  </div>
+
+  <div class="error" *ngIf="error">
+    <p><i class="fas fa-exclamation-circle"></i> {{ error }}</p>
+  </div>
+
+  <div class="cards-grid" *ngIf="!loading && !error">
+    <div class="card" *ngFor="let card of cards">
+      <img 
+        [src]="card.card_images[0].image_url || 'assets/img/placeholder.png'" 
+        [alt]="card.name" 
+        loading="lazy" 
+        class="card-img">
+      <h3>{{ card.name }}</h3>
+      <p class="card-type">{{ card.type }}</p>
+      <p class="card-price"><i class="fas fa-euro-sign"></i> {{ card.card_prices?.[0]?.cardmarket_price || 'N/A' }}</p>
+      <p class="card-desc">{{ card.desc | slice:0:80 }}{{ card.desc.length > 80 ? '...' : '' }}</p>
+      <div class="card-actions">
+        <button class="cta-button" (click)="viewCardDetails(card.id)">
+          <i class="fas fa-eye"></i> Ver Detalhes
+        </button>
+        <button class="cta-button secondary">
+          <i class="fas fa-shopping-cart"></i> Comprar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="pagination" *ngIf="cards.length > 0 && !loading && !error">
+    <button 
+      [disabled]="currentPage === 1" 
+      (click)="onPageChange(currentPage - 1)">
+      <i class="fas fa-chevron-left"></i> Anterior
+    </button>
+    <span><i class="fas fa-file"></i> Página {{ currentPage }}</span>
+    <button 
+      [disabled]="cards.length < pageSize" 
+      (click)="onPageChange(currentPage + 1)">
+      Próxima <i class="fas fa-chevron-right"></i>
+    </button>
+  </div>
+</section>
