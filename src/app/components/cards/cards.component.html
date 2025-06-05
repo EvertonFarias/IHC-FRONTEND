@@ -40,15 +40,17 @@
 
   <div class="cards-grid" *ngIf="!loading && !error">
     <div class="card" *ngFor="let card of cards">
-      <img 
-        [src]="card.card_images[0].image_url || 'assets/img/placeholder.png'" 
-        [alt]="card.name" 
-        loading="lazy" 
-        class="card-img">
-      <h3>{{ card.name }}</h3>
-      <p class="card-type">{{ card.type }}</p>
-      <p class="card-price"><i class="fas fa-euro-sign"></i> {{ card.card_prices?.[0]?.cardmarket_price || 'N/A' }}</p>
-      <p class="card-desc">{{ card.desc | slice:0:80 }}{{ card.desc.length > 80 ? '...' : '' }}</p>
+      <div>
+        <img
+          [src]="card.card_images[0].image_url || 'assets/img/placeholder.png'"
+          [alt]="card.name"
+          loading="lazy"
+          class="card-img">
+        <h3>{{ card.name }}</h3>
+        <p class="card-type">{{ card.type }}</p>
+        <p class="card-price"><i class="fas fa-euro-sign"></i> {{ card.card_prices?.[0]?.cardmarket_price || 'N/A' }}</p>
+        <p class="card-desc">{{ card.desc | slice:0:80 }}{{ card.desc.length > 80 ? '...' : '' }}</p>
+      </div>
       <div class="card-actions">
         <button class="cta-button" (click)="viewCardDetails(card.id)">
           <i class="fas fa-eye"></i> Ver Detalhes
