@@ -2,6 +2,11 @@
 
 Este é um projeto de frontend desenvolvido em Angular para a disciplina de Interação Humano-Computador (IHC) na faculdade. O sistema simula uma plataforma de cartas colecionáveis, com funcionalidades de autenticação, visualização de cartas e estatísticas do usuário.
 
+#### Links importantes: 
+- Hospedagem: http://31.97.130.19:4300/auth/login
+- Backend em SpringBoot: https://github.com/EvertonFarias/IHC-BACKEND
+
+
 ## Tecnologias Utilizadas
 
 - **Frontend:** Angular, TypeScript, CSS
